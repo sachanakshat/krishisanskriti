@@ -95,6 +95,25 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Map */}
+        <div className="mb-10">
+          <h4 className="text-white font-bold mb-4 text-sm tracking-wide uppercase">
+            📍 {t.footer.contact === "Contact" ? "Our Location" : "हमारा स्थान"}
+          </h4>
+          <div className="rounded-2xl overflow-hidden border border-zinc-800/60 w-full aspect-video sm:aspect-[16/6]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2957.9623398853364!2d78.48869068194244!3d25.4044026620663!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3977700f45f12a13%3A0x9f155c996265d006!2sJaivik%20Kheti%20Prashikshan%20Kendra!5e0!3m2!1sen!2sin!4v1772393349713!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Jaivik Kheti Prashikshan Kendra"
+            />
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-zinc-600 text-xs">{t.footer.copyright}</p>
