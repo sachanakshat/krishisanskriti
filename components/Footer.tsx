@@ -39,6 +39,7 @@ export default function Footer() {
                 { href: "/", label: t.nav.home },
                 { href: "#about", label: t.nav.about },
                 { href: "#training", label: t.nav.training },
+                { href: "#videos", label: t.nav.videos },
                 { href: "/register", label: t.nav.register },
               ].map((link) => (
                 <Link

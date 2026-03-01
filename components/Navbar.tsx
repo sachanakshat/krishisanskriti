@@ -20,6 +20,7 @@ export default function Navbar() {
     { href: "/", label: t.nav.home },
     { href: "#about", label: t.nav.about },
     { href: "#training", label: t.nav.training },
+    { href: "#videos", label: t.nav.videos },
     { href: "#contact", label: t.nav.contact },
   ];
 
