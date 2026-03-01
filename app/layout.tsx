@@ -11,7 +11,7 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sanatan Krishi | सनातन कृषि - Organic Farming & Healthy Living",
+  title: "Krishi Sanskriti | कृषि संस्कृति - Organic Farming & Healthy Living",
   description:
     "Learn organic farming, healthy lifestyle and Sanatan Sanskriti. Join our training program. जैविक खेती, स्वस्थ जीवन और सनातन संस्कृति सीखें।",
 };

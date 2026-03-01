@@ -19,9 +19,9 @@ export default function Footer() {
               <span className="text-2xl">🌿</span>
               <div className="flex flex-col leading-none">
                 <span className="text-green-400 font-bold text-base">
-                  Sanatan Krishi
+                  Krishi Sanskriti
                 </span>
-                <span className="text-green-700 text-xs">सनातन कृषि</span>
+                <span className="text-green-700 text-xs">कृषि संस्कृति</span>
               </div>
             </div>
             <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
@@ -57,19 +57,39 @@ export default function Footer() {
             <h4 className="text-white font-bold mb-4 text-sm tracking-wide uppercase">
               {t.footer.contact}
             </h4>
-            <div className="flex flex-col gap-3 text-sm text-zinc-500">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col gap-3 text-sm">
+              <a
+                href="https://www.youtube.com/@Krishisanskritiofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-zinc-500 hover:text-red-400 transition-colors"
+              >
                 <span>📺</span>
-                <span>YouTube: Sanatan Krishi</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span>📱</span>
-                <span>WhatsApp / Call</span>
-              </div>
-              <div className="flex items-center gap-2">
+                <span>YouTube: Krishi Sanskriti</span>
+              </a>
+              <a
+                href="https://wa.me/918707673442"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
+              >
+                <span>💬</span>
+                <span>WhatsApp: +91 8707673442</span>
+              </a>
+              <a
+                href="tel:+918707673442"
+                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
+              >
+                <span>📞</span>
+                <span>+91 8707673442</span>
+              </a>
+              <a
+                href="mailto:sachanjhansi@gmail.com"
+                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
+              >
                 <span>📧</span>
-                <span>contact@sanatankrishi.in</span>
-              </div>
+                <span>sachanjhansi@gmail.com</span>
+              </a>
             </div>
           </div>
         </div>

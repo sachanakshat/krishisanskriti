@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     const client = await clientPromise;
-    const db = client.db("sanatankrishi");
+    const db = client.db("krishisanskriti");
     const collection = db.collection("registrations");
 
     const result = await collection.insertOne({

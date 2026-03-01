@@ -11,7 +11,7 @@ export const translations = {
     },
     hero: {
       badge: "🌿 Extension of our YouTube Channel",
-      title: "Sanatan Krishi",
+      title: "Krishi Sanskriti",
       subtitle: "Organic Farming · Healthy Living · Sanatan Sanskriti",
       description:
         "Reconnect with nature through ancient Indian farming wisdom. Join our community of farmers reviving traditional, chemical-free agriculture for a healthier India.",
@@ -106,7 +106,7 @@ export const translations = {
       tagline: "Reconnecting India with its agricultural roots.",
       links: "Quick Links",
       contact: "Contact Us",
-      copyright: "© 2026 Sanatan Krishi. All rights reserved.",
+      copyright: "© 2026 Krishi Sanskriti. All rights reserved.",
     },
   },
 
@@ -120,7 +120,7 @@ export const translations = {
     },
     hero: {
       badge: "🌿 हमारे YouTube चैनल का विस्तार",
-      title: "सनातन कृषि",
+      title: "कृषि संस्कृति",
       subtitle: "जैविक खेती · स्वस्थ जीवन · सनातन संस्कृति",
       description:
         "प्राचीन भारतीय कृषि ज्ञान के माध्यम से प्रकृति से पुनः जुड़ें। उन किसानों के हमारे समुदाय में शामिल हों जो स्वस्थ भारत के लिए पारंपरिक, रसायन-मुक्त खेती को पुनर्जीवित कर रहे हैं।",
@@ -216,7 +216,7 @@ export const translations = {
       tagline: "भारत को उसकी कृषि जड़ों से फिर से जोड़ना।",
       links: "त्वरित लिंक",
       contact: "संपर्क करें",
-      copyright: "© 2026 सनातन कृषि। सर्वाधिकार सुरक्षित।",
+      copyright: "© 2026 कृषि संस्कृति। सर्वाधिकार सुरक्षित।",
     },
   },
 };

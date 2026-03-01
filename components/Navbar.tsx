@@ -40,10 +40,10 @@ export default function Navbar() {
             </span>
             <div className="flex flex-col leading-none">
               <span className="text-green-400 font-bold text-base leading-tight tracking-wide">
-                Sanatan Krishi
+                Krishi Sanskriti
               </span>
               <span className="text-green-600/70 text-[10px] leading-tight">
-                सनातन कृषि
+                कृषि संस्कृति
               </span>
             </div>
           </Link>
