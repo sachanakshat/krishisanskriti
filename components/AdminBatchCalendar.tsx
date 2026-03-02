@@ -7,7 +7,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { format, parse, startOfWeek, getDay, addDays } from "date-fns";
 import { enUS } from "date-fns/locale";
-import { Trash2, Users, Plus, MoveRight, X, Check } from "lucide-react";
+import { Trash2, Users, Plus, MoveRight, X, Check, CalendarRange } from "lucide-react";
 import type { BatchWithCount } from "@/types/batch";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
@@ -83,6 +83,10 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
   const [moveMsg, setMoveMsg] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editMaxSeats, setEditMaxSeats] = useState("");
+  const [showReschedule, setShowReschedule] = useState(false);
+  const [rescheduleDate, setRescheduleDate] = useState("");
+  const [rescheduleMsg, setRescheduleMsg] = useState<string | null>(null);
+  const [rescheduleLoading, setRescheduleLoading] = useState(false);
 
   const loadBatches = useCallback(async () => {
     setLoading(true);
@@ -116,6 +120,9 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
     setEditMaxSeats(String(e.resource.maxSeats));
     setMoveRegId(null);
     setMoveMsg(null);
+    setShowReschedule(false);
+    setRescheduleDate("");
+    setRescheduleMsg(null);
     loadAttendees(e.resource._id);
   };
 
@@ -204,6 +211,34 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
     }
   };
 
+  const handleRescheduleBatch = async () => {
+    if (!selectedBatch || !rescheduleDate) return;
+    const adjusted = getMondayStr(new Date(rescheduleDate + "T00:00:00"));
+    if (adjusted === selectedBatch.weekStart) {
+      setRescheduleMsg("⚠️ That's already the current week.");
+      return;
+    }
+    setRescheduleLoading(true);
+    setRescheduleMsg(null);
+    const r = await fetch(`/api/batches/${selectedBatch._id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ weekStart: adjusted }),
+    });
+    const d = await r.json();
+    if (r.ok) {
+      setRescheduleMsg("✅ Moved to " + adjusted + "! All attendees updated.");
+      setSelectedBatch((p) => p ? { ...p, weekStart: adjusted } : null);
+      setDate(new Date(adjusted + "T00:00:00"));
+      setRescheduleDate("");
+      loadBatches();
+      setTimeout(() => { setShowReschedule(false); setRescheduleMsg(null); }, 2500);
+    } else {
+      setRescheduleMsg("❌ " + (d.error ?? "Failed"));
+    }
+    setRescheduleLoading(false);
+  };
+
   const events = batches.map(batchToEvent);
 
   // Theme-aware input class (replaces removed .input-field CSS)
@@ -281,7 +316,7 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                   placeholder="Internal notes" className={inputCls} />
               </div>
             </div>
-            {addMsg && <p className={`text-xs ${addMsg.startsWith("✅") ? "text-green-400" : "text-red-400"}`}>{addMsg}</p>}
+            {addMsg && <p className={`text-xs ${addMsg.startsWith("✅") ? dark ? "text-green-400" : "text-green-600" : dark ? "text-red-400" : "text-red-600"}`}>{addMsg}</p>}
             <div className="flex gap-2">
               <button type="submit" className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white text-xs font-bold rounded-xl transition-all">
                 Create Batch
@@ -339,7 +374,7 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                     className={`w-14 text-xs bg-transparent border-b focus:border-green-500 outline-none px-0 ${dark ? "border-zinc-700 text-white" : "border-slate-300 text-slate-700"}`}
                   />
                   <button onClick={handleSaveEdit}
-                    className="px-2 py-0.5 bg-green-700/50 hover:bg-green-600/60 border border-green-700/40 text-green-300 text-xs rounded-lg transition-all">
+                    className={`px-2 py-0.5 border text-xs rounded-lg transition-all ${dark ? "bg-green-700/50 hover:bg-green-600/60 border-green-700/40 text-green-300" : "bg-green-600 hover:bg-green-500 border-green-600 text-white"}`}>
                     Save
                   </button>
                 </div>
@@ -350,14 +385,23 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                     return `${mon.toLocaleDateString("en-IN", { day: "numeric", month: "short" })} – ${thu.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`;
                   })()}
                   {" · "}
-                  <span className={selectedBatch.seatsLeft <= 5 ? "text-red-400" : "text-green-400"}>
+                  <span className={selectedBatch.seatsLeft <= 5 ? dark ? "text-red-400" : "text-red-600" : dark ? "text-green-400" : "text-green-600"}>
                     {selectedBatch.seatsLeft} / {selectedBatch.maxSeats} seats left
                   </span>
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => { if (!showReschedule) setRescheduleDate(selectedBatch.weekStart); setShowReschedule((p) => !p); }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors border ${
+                    showReschedule
+                      ? dark ? "bg-blue-900/50 border-blue-700/50 text-blue-300" : "bg-blue-100 border-blue-300 text-blue-700"
+                      : dark ? "bg-blue-950/40 hover:bg-blue-900/50 border-blue-900/30 text-blue-400" : "bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-600"
+                  }`}>
+                  <CalendarRange size={11} /> Reschedule
+                </button>
                 <button onClick={() => handleDeleteBatch(selectedBatch._id)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/50 border border-red-900/30 text-red-400 text-xs transition-colors">
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-colors border ${dark ? "bg-red-950/40 hover:bg-red-900/50 border-red-900/30 text-red-400" : "bg-red-50 hover:bg-red-100 border-red-200 text-red-600"}`}>
                   <Trash2 size={11} /> Delete
                 </button>
                 <button onClick={() => setSelectedBatch(null)}
@@ -366,6 +410,58 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                 </button>
               </div>
             </div>
+
+            {/* Reschedule panel */}
+            {showReschedule && (
+              <div className={`px-5 py-4 border-b space-y-3 ${dark ? "border-zinc-800/60 bg-zinc-800/30" : "border-slate-200 bg-blue-50/40"}`}>
+                <p className={`text-xs font-bold flex items-center gap-1.5 ${dark ? "text-zinc-300" : "text-slate-700"}`}>
+                  <CalendarRange size={12} /> Move Batch to a New Week
+                </p>
+                <p className={`text-xs ${dark ? "text-zinc-500" : "text-slate-500"}`}>
+                  Currently: <strong>{selectedBatch.weekStart}</strong>
+                  {attendees.length > 0 && <span> · <strong>{attendees.length}</strong> attendee(s) will be moved automatically</span>}
+                </p>
+                <div className="flex items-end gap-2 flex-wrap">
+                  <div className="flex-1 min-w-45">
+                    <label className={`block text-xs mb-1 ${dark ? "text-zinc-400" : "text-slate-600"}`}>
+                      New Week Start <span className={`text-[10px] ${dark ? "text-zinc-600" : "text-slate-400"}`}>(non-Monday auto-adjusted)</span>
+                      <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      value={rescheduleDate}
+                      onChange={(e) => setRescheduleDate(e.target.value)}
+                      className={inputCls}
+                    />
+                  </div>
+                  <button
+                    onClick={handleRescheduleBatch}
+                    disabled={!rescheduleDate || rescheduleLoading}
+                    className="flex items-center gap-1.5 px-4 py-2 bg-green-600 hover:bg-green-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl transition-all shrink-0"
+                  >
+                    {rescheduleLoading
+                      ? <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      : <Check size={12} />}
+                    Confirm Move
+                  </button>
+                  <button
+                    onClick={() => { setShowReschedule(false); setRescheduleDate(""); setRescheduleMsg(null); }}
+                    className={`px-3 py-2 text-xs font-semibold rounded-xl transition-all ${dark ? "bg-zinc-700 hover:bg-zinc-600 text-zinc-300" : "bg-slate-200 hover:bg-slate-300 text-slate-600"}`}
+                  >
+                    Cancel
+                  </button>
+                </div>
+                {rescheduleMsg && (
+                  <p className={`text-xs px-3 py-2 rounded-lg ${
+                    rescheduleMsg.startsWith("✅") ? dark ? "bg-green-950/40 text-green-400" : "bg-green-50 text-green-700 border border-green-200"
+                    : rescheduleMsg.startsWith("⚠️") ? dark ? "bg-yellow-950/40 text-yellow-400" : "bg-yellow-50 text-yellow-700 border border-yellow-200"
+                    : dark ? "bg-red-950/40 text-red-400" : "bg-red-50 text-red-600 border border-red-200"
+                  }`}>
+                    {rescheduleMsg}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Attendees */}
             <div className="p-5">
@@ -385,7 +481,7 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
               ) : (
                 <div className="space-y-2">
                   {moveMsg && (
-                    <div className={`text-xs px-3 py-2 rounded-lg ${moveMsg.startsWith("✅") ? "bg-green-950/40 text-green-400" : "bg-red-950/40 text-red-400"}`}>
+                    <div className={`text-xs px-3 py-2 rounded-lg ${moveMsg.startsWith("✅") ? dark ? "bg-green-950/40 text-green-400" : "bg-green-50 text-green-700 border border-green-200" : dark ? "bg-red-950/40 text-red-400" : "bg-red-50 text-red-600 border border-red-200"}`}>
                       {moveMsg}
                     </div>
                   )}
@@ -393,7 +489,7 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                     <div key={a._id} className={`rounded-xl border p-3 ${dark ? "bg-zinc-800/50 border-zinc-700/40" : "bg-slate-50 border-slate-200"}`}>
                       <div className="flex items-start justify-between gap-2">
                         <div className="flex items-start gap-2.5">
-                          <div className="w-7 h-7 rounded-full bg-green-900/40 border border-green-800/40 flex items-center justify-center text-xs font-black text-green-400 shrink-0">
+                          <div className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs font-black shrink-0 ${dark ? "bg-green-900/40 border-green-800/40 text-green-400" : "bg-green-100 border-green-200 text-green-700"}`}>
                             {a.name.charAt(0).toUpperCase()}
                           </div>
                           <div>
@@ -404,14 +500,14 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                         <div className="flex items-center gap-1.5 shrink-0">
                           <button
                             onClick={() => setMoveRegId(moveRegId === a._id ? null : a._id)}
-                            className="p-1.5 rounded-lg bg-blue-950/40 hover:bg-blue-900/40 border border-blue-900/30 text-blue-400 text-xs transition-colors"
+                            className={`p-1.5 rounded-lg border text-xs transition-colors ${dark ? "bg-blue-950/40 hover:bg-blue-900/40 border-blue-900/30 text-blue-400" : "bg-blue-50 hover:bg-blue-100 border-blue-200 text-blue-600"}`}
                             title="Move to another batch"
                           >
                             <MoveRight size={11} />
                           </button>
                           <button
                             onClick={() => handleRemoveAttendee(a._id)}
-                            className="p-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/40 border border-red-900/30 text-red-400 transition-colors"
+                            className={`p-1.5 rounded-lg border transition-colors ${dark ? "bg-red-950/40 hover:bg-red-900/40 border-red-900/30 text-red-400" : "bg-red-50 hover:bg-red-100 border-red-200 text-red-500"}`}
                             title="Remove from batch"
                           >
                             <X size={11} />
@@ -439,7 +535,7 @@ export default function AdminBatchCalendar({ dark = false }: { dark?: boolean })
                           <button
                             onClick={() => handleMoveAttendee(a._id)}
                             disabled={!moveToBatchId}
-                            className="p-1.5 rounded-lg bg-green-700 hover:bg-green-600 disabled:bg-zinc-700 disabled:cursor-not-allowed text-white transition-colors"
+                            className={`p-1.5 rounded-lg bg-green-700 hover:bg-green-600 text-white transition-colors disabled:cursor-not-allowed ${dark ? "disabled:bg-zinc-700" : "disabled:bg-slate-300"}`}
                             title="Confirm move"
                           >
                             <Check size={12} />
