@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
 import clientPromise from "@/lib/mongodb";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, village, district, state, phone, land } = body;
+    const { name, village, district, state, phone, land, batchId, batchWeekStart } = body;
 
     if (!name || !village || !district || !state || !phone || !land) {
       return NextResponse.json(
@@ -15,15 +16,31 @@ export async function POST(req: NextRequest) {
 
     const client = await clientPromise;
     const db = client.db("krishisanskriti");
-    const collection = db.collection("registrations");
 
-    const result = await collection.insertOne({
+    // Seat-limit check
+    if (batchId) {
+      try {
+        const batch = await db.collection("batches").findOne({ _id: new ObjectId(String(batchId)) });
+        if (batch) {
+          const count = await db.collection("registrations").countDocuments({ batchId: String(batchId) });
+          if (count >= (batch.maxSeats ?? 32)) {
+            return NextResponse.json({ error: "Batch is full" }, { status: 409 });
+          }
+        }
+      } catch {
+        // Invalid ObjectId — ignore seat check
+      }
+    }
+
+    const result = await db.collection("registrations").insertOne({
       name: String(name).trim(),
       village: String(village).trim(),
       district: String(district).trim(),
       state: String(state).trim(),
       phone: String(phone).trim(),
       land: parseFloat(land),
+      batchId: batchId ? String(batchId) : null,
+      batchWeekStart: batchWeekStart ? String(batchWeekStart) : null,
       paymentStatus: "pending",
       createdAt: new Date(),
     });

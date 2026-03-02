@@ -2,11 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import {
   Lock, Users, Youtube, LayoutDashboard, Search, ChevronDown, ChevronUp,
   Plus, Trash2, ExternalLink, Sparkles, Phone, MapPin, Landmark,
-  CheckCircle, Clock, XCircle, RefreshCw, LogOut,
+  CheckCircle, Clock, XCircle, RefreshCw, LogOut, Calendar,
 } from "lucide-react";
+
+const AdminBatchCalendar = dynamic(() => import("@/components/AdminBatchCalendar"), { ssr: false });
 
 // ─── Auth Gate ────────────────────────────────────────────────────────────────
 function LoginGate({ onAuth }: { onAuth: () => void }) {
@@ -549,7 +552,7 @@ function VideosTab() {
 }
 
 // ─── Main Admin Page ───────────────────────────────────────────────────────────
-type Tab = "dashboard" | "registrations" | "videos";
+type Tab = "dashboard" | "registrations" | "videos" | "batches";
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
@@ -573,6 +576,7 @@ export default function AdminPage() {
     { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={15} /> },
     { id: "registrations", label: `Registrations (${regs.length})`, icon: <Users size={15} /> },
     { id: "videos", label: `Videos (${videos.length})`, icon: <Youtube size={15} /> },
+    { id: "batches", label: "Batches", icon: <Calendar size={15} /> },
   ];
 
   return (
@@ -620,6 +624,7 @@ export default function AdminPage() {
         {tab === "dashboard" && <DashboardTab regs={regs} videos={videos} />}
         {tab === "registrations" && <RegistrationsTab />}
         {tab === "videos" && <VideosTab />}
+        {tab === "batches" && <AdminBatchCalendar />}
       </div>
 
       <style>{`
