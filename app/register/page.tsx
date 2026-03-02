@@ -18,15 +18,15 @@ function BatchPicker({
     return thu >= today;
   });
   if (upcoming.length === 0) return (
-    <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/60 p-6 text-center mb-6">
+    <div className="rounded-2xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800/60 p-6 text-center mb-6">
       <div className="text-3xl mb-2">📅</div>
-      <p className="text-zinc-400 text-sm mb-3">{lang === "hi" ? "अभी कोई उपलब्ध बैच नहीं" : "No upcoming batches available"}</p>
-      <Link href="/#calendar" className="text-green-400 text-xs hover:underline">{lang === "hi" ? "कैलेंडर देखें →" : "Check calendar →"}</Link>
+      <p className="text-slate-500 dark:text-zinc-400 text-sm mb-3">{lang === "hi" ? "अभी कोई उपलब्ध बैच नहीं" : "No upcoming batches available"}</p>
+      <Link href="/#calendar" className="text-green-600 dark:text-green-400 text-xs hover:underline">{lang === "hi" ? "कैलेंडर देखें →" : "Check calendar →"}</Link>
     </div>
   );
   return (
     <div className="mb-6">
-      <label className="block text-zinc-300 text-sm font-semibold mb-3">
+      <label className="block text-slate-700 dark:text-zinc-300 text-sm font-semibold mb-3">
         {lang === "hi" ? "बैच चुनें" : "Select Batch"}<span className="text-green-600 ml-1">*</span>
       </label>
       <div className="space-y-2 max-h-72 overflow-y-auto pr-0.5">
@@ -37,21 +37,21 @@ function BatchPicker({
           return (
             <button key={b._id} type="button" disabled={full} onClick={() => onSelect(b._id)}
               className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all ${
-                selected === b._id ? "bg-green-900/40 border-green-600/60 text-white"
-                : full ? "opacity-40 cursor-not-allowed bg-zinc-900/40 border-zinc-700/40 text-zinc-500"
-                : "bg-zinc-900/40 border-zinc-700/40 hover:border-green-700/60 text-zinc-300 hover:text-white"}`}>
+                selected === b._id ? "bg-green-100 dark:bg-green-900/40 border-green-500 dark:border-green-600/60 text-green-900 dark:text-white"
+                : full ? "opacity-40 cursor-not-allowed bg-slate-100 dark:bg-zinc-900/40 border-slate-200 dark:border-zinc-700/40 text-slate-400 dark:text-zinc-500"
+                : "bg-white dark:bg-zinc-900/40 border-slate-200 dark:border-zinc-700/40 hover:border-green-400 dark:hover:border-green-700/60 text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white"}`}>
               <div>
                 <p className="font-semibold text-sm">{b.title}</p>
-                <p className="text-xs text-zinc-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-zinc-500 mt-0.5">
                   {mon.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", { weekday: "short", day: "numeric", month: "short" })}
                   {" – "}{thu.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "short", year: "numeric" })}
                 </p>
               </div>
               <div className="text-right shrink-0 ml-3">
                 {full
-                  ? <span className="text-xs text-zinc-600">{lang === "hi" ? "भरा" : "Full"}</span>
-                  : <><span className={`text-lg font-black ${urgent ? "text-red-400" : "text-green-400"}`}>{b.seatsLeft}</span>
-                     <p className="text-[10px] text-zinc-600">{lang === "hi" ? "सीट बचीं" : "seats left"}</p></>}
+                  ? <span className="text-xs text-slate-400 dark:text-zinc-600">{lang === "hi" ? "भरा" : "Full"}</span>
+                  : <><span className={`text-lg font-black ${urgent ? "text-red-500" : "text-green-600 dark:text-green-400"}`}>{b.seatsLeft}</span>
+                     <p className="text-[10px] text-slate-400 dark:text-zinc-600">{lang === "hi" ? "सीट बचीं" : "seats left"}</p></>}
               </div>
             </button>
           );
@@ -122,19 +122,19 @@ function RegisterForm() {
     const full = selectedBatch.seatsLeft <= 0;
     const urgent = !full && selectedBatch.seatsLeft <= 5;
     return (
-      <div className={`rounded-2xl p-4 mb-5 border ${full ? "bg-zinc-900/50 border-zinc-700/50" : urgent ? "bg-red-950/20 border-red-900/30" : "bg-green-950/20 border-green-900/30"}`}>
+      <div className={`rounded-2xl p-4 mb-5 border ${full ? "bg-slate-100 dark:bg-zinc-900/50 border-slate-300 dark:border-zinc-700/50" : urgent ? "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900/30" : "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900/30"}`}>
         <div className="flex items-start gap-3">
-          <Calendar size={16} className={`mt-0.5 shrink-0 ${full ? "text-zinc-600" : urgent ? "text-red-400" : "text-green-400"}`} />
+          <Calendar size={16} className={`mt-0.5 shrink-0 ${full ? "text-slate-400 dark:text-zinc-600" : urgent ? "text-red-500" : "text-green-600 dark:text-green-400"}`} />
           <div className="flex-1 min-w-0">
-            <p className={`font-bold text-sm ${full ? "text-zinc-400" : "text-white"}`}>{selectedBatch.title}</p>
-            <p className="text-zinc-500 text-xs mt-0.5">
+            <p className={`font-bold text-sm ${full ? "text-slate-500 dark:text-zinc-400" : "text-slate-800 dark:text-white"}`}>{selectedBatch.title}</p>
+            <p className="text-slate-500 dark:text-zinc-500 text-xs mt-0.5">
               {mon.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", { weekday: "long", day: "numeric", month: "long" })}
               {" – "}
               {thu.toLocaleDateString(lang === "hi" ? "hi-IN" : "en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
             </p>
             <div className="flex items-center gap-1.5 mt-2">
               <Users size={11} className={full ? "text-zinc-600" : urgent ? "text-red-400" : "text-green-500"} />
-              <span className={`text-xs font-semibold ${full ? "text-zinc-500" : urgent ? "text-red-400" : "text-green-400"}`}>
+              <span className={`text-xs font-semibold ${full ? "text-slate-400 dark:text-zinc-500" : urgent ? "text-red-500" : "text-green-600 dark:text-green-400"}`}>
                 {full
                   ? (lang === "hi" ? "यह बैच भर चुका है" : "This batch is full")
                   : urgent
@@ -143,7 +143,7 @@ function RegisterForm() {
               </span>
             </div>
           </div>
-          <Link href="/#calendar" className="text-xs text-zinc-500 hover:text-green-400 transition-colors shrink-0">
+          <Link href="/#calendar" className="text-xs text-slate-400 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors shrink-0">
             {lang === "hi" ? "बदलें" : "Change"}
           </Link>
         </div>
@@ -152,31 +152,31 @@ function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050a05]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#050a05]">
       <Navbar />
       <div className="pt-24 pb-16 px-4">
         <div className="max-w-lg mx-auto">
-          <Link href="/" className="inline-flex items-center gap-2 text-zinc-500 hover:text-green-400 text-sm mb-8 transition-colors group">
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 text-sm mb-8 transition-colors group">
             <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
             {lang === "hi" ? "होम पर वापस जाएं" : "Back to Home"}
           </Link>
           <div className="text-center mb-8">
             <div className="text-5xl mb-4">📝</div>
-            <h1 className="text-3xl sm:text-4xl font-black text-white mb-2">{t.register.title}</h1>
-            <p className="text-zinc-500 text-sm sm:text-base">{t.register.subtitle}</p>
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-2">{t.register.title}</h1>
+            <p className="text-slate-500 dark:text-zinc-500 text-sm sm:text-base">{t.register.subtitle}</p>
           </div>
-          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
+          <div className="bg-white dark:bg-zinc-900/60 border border-slate-200 dark:border-zinc-800/60 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
             {status === "success" ? (
               <div className="text-center py-10">
-                <div className="w-16 h-16 bg-green-900/50 border border-green-700/50 rounded-full flex items-center justify-center mx-auto mb-5">
+                <div className="w-16 h-16 bg-green-100 dark:bg-green-900/50 border border-green-300 dark:border-green-700/50 rounded-full flex items-center justify-center mx-auto mb-5">
                   <Check size={28} className="text-green-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{lang === "hi" ? "पंजीकरण सफल!" : "Registration Successful!"}</h3>
-                <p className="text-zinc-400 text-sm mb-4 leading-relaxed">{t.register.success}</p>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{lang === "hi" ? "पंजीकरण सफल!" : "Registration Successful!"}</h3>
+                <p className="text-slate-500 dark:text-zinc-400 text-sm mb-4 leading-relaxed">{t.register.success}</p>
                 {selectedBatch && (
-                  <p className="text-green-400/70 text-xs mb-6">
+                  <p className="text-green-600/80 dark:text-green-400/70 text-xs mb-6">
                     {lang === "hi" ? "बैच:" : "Batch:"}{" "}
-                    <strong className="text-green-400">{selectedBatch.title}</strong>
+                    <strong className="text-green-600 dark:text-green-400">{selectedBatch.title}</strong>
                   </p>
                 )}
                 <Link href="/" className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium transition-colors">
@@ -185,11 +185,11 @@ function RegisterForm() {
               </div>
             ) : status === "full" ? (
               <div className="text-center py-10">
-                <div className="w-16 h-16 bg-red-900/30 border border-red-800/40 rounded-full flex items-center justify-center mx-auto mb-5">
+                <div className="w-16 h-16 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800/40 rounded-full flex items-center justify-center mx-auto mb-5">
                   <AlertCircle size={28} className="text-red-400" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{lang === "hi" ? "बैच भर गया है!" : "Batch is Full!"}</h3>
-                <p className="text-zinc-400 text-sm mb-6">{lang === "hi" ? "यह बैच भर चुका है। कृपया दूसरा बैच चुनें।" : "This batch is full. Please choose a different batch."}</p>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{lang === "hi" ? "बैच भर गया है!" : "Batch is Full!"}</h3>
+                <p className="text-slate-500 dark:text-zinc-400 text-sm mb-6">{lang === "hi" ? "यह बैच भर चुका है। कृपया दूसरा बैच चुनें।" : "This batch is full. Please choose a different batch."}</p>
                 <Link href="/#calendar" className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-full text-sm transition-all">
                   <Calendar size={14} />{lang === "hi" ? "दूसरा बैच चुनें" : "Choose Another Batch"}
                 </Link>
@@ -197,7 +197,7 @@ function RegisterForm() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 {loadingBatches ? (
-                  <div className="flex items-center gap-2 py-5 text-zinc-600 text-sm">
+                  <div className="flex items-center gap-2 py-5 text-slate-400 dark:text-zinc-600 text-sm">
                     <div className="w-3.5 h-3.5 border-2 border-green-700 border-t-transparent rounded-full animate-spin" />
                     {lang === "hi" ? "बैच लोड हो रहे हैं..." : "Loading batches..."}
                   </div>
@@ -207,7 +207,7 @@ function RegisterForm() {
 
                 {fields.map((field) => (
                   <div key={field.key}>
-                    <label className="block text-zinc-300 text-sm font-semibold mb-2">
+                    <label className="block text-slate-700 dark:text-zinc-300 text-sm font-semibold mb-2">
                       {field.label}<span className="text-green-600 ml-1">*</span>
                     </label>
                     <input
@@ -217,37 +217,37 @@ function RegisterForm() {
                       placeholder={field.placeholder} required
                       min={field.type === "number" ? "0" : undefined}
                       step={field.type === "number" ? "0.1" : undefined}
-                      className="w-full bg-zinc-800/70 border border-zinc-700/60 text-white placeholder-zinc-600 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-green-600/70 focus:ring-1 focus:ring-green-600/40 transition-all hover:border-zinc-600"
+                      className="w-full bg-white dark:bg-zinc-800/70 border border-slate-300 dark:border-zinc-700/60 text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-zinc-600 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-green-500/70 dark:focus:border-green-600/70 focus:ring-1 focus:ring-green-500/40 dark:focus:ring-green-600/40 transition-all hover:border-slate-400 dark:hover:border-zinc-600"
                     />
                   </div>
                 ))}
 
-                <div className="rounded-2xl bg-amber-950/20 border border-amber-900/25 p-4">
+                <div className="rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/25 p-4">
                   <div className="flex items-start gap-3">
                     <span className="text-xl mt-0.5">🔒</span>
                     <div>
-                      <p className="text-amber-400 text-xs font-semibold mb-1">{t.payment.title}</p>
-                      <p className="text-zinc-500 text-xs leading-relaxed">{t.payment.description}</p>
+                      <p className="text-amber-600 dark:text-amber-400 text-xs font-semibold mb-1">{t.payment.title}</p>
+                      <p className="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">{t.payment.description}</p>
                     </div>
                   </div>
                 </div>
 
                 {status === "error" && (
-                  <div className="rounded-xl bg-red-950/30 border border-red-900/30 px-4 py-3">
-                    <p className="text-red-400 text-sm">{errorMsg || t.register.error}</p>
+                  <div className="rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/30 px-4 py-3">
+                    <p className="text-red-600 dark:text-red-400 text-sm">{errorMsg || t.register.error}</p>
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === "loading" || (!!selectedBatch && selectedBatch.seatsLeft <= 0)}
-                  className="w-full py-4 bg-green-600 hover:bg-green-500 disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold text-base rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-green-950/40 hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full py-4 bg-green-600 hover:bg-green-500 disabled:bg-slate-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold text-base rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-green-950/40 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   {status === "loading" ? t.register.submitting
                     : selectedBatch?.seatsLeft === 0 ? (lang === "hi" ? "बैच भर गया है" : "Batch Full")
                     : t.register.submit}
                 </button>
-                <p className="text-center text-zinc-600 text-xs">{t.training.seats}</p>
+                <p className="text-center text-slate-400 dark:text-zinc-600 text-xs">{t.training.seats}</p>
               </form>
             )}
           </div>
@@ -261,7 +261,7 @@ function RegisterForm() {
 export default function RegisterPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#050a05] flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#050a05] flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
       </div>
     }>

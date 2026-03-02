@@ -116,3 +116,23 @@ html.dark {
 .rbc-admin-wrapper .rbc-event { border-radius: 4px; }
 .rbc-admin-wrapper .rbc-event.rbc-selected { box-shadow: 0 0 0 2px #4ade80; }
 .rbc-admin-wrapper .rbc-show-more { color: #86efac; font-size: 10px; }
+
+/* ─── react-big-calendar light overrides ─── */
+.rbc-admin-light-wrapper .rbc-calendar { background: #ffffff; color: #1e293b; }
+.rbc-admin-light-wrapper .rbc-toolbar { margin-bottom: 12px; }
+.rbc-admin-light-wrapper .rbc-toolbar button { color: #475569; background: #f1f5f9; border-color: #e2e8f0; border-radius: 8px; }
+.rbc-admin-light-wrapper .rbc-toolbar button:hover { background: #e2e8f0; color: #0f172a; }
+.rbc-admin-light-wrapper .rbc-toolbar button.rbc-active { background: #166534; color: #86efac; border-color: #166534; }
+.rbc-admin-light-wrapper .rbc-month-view,
+.rbc-admin-light-wrapper .rbc-time-view { border-color: #e2e8f0; background: #ffffff; border-radius: 12px; overflow: hidden; }
+.rbc-admin-light-wrapper .rbc-header { background: #f8fafc; color: #166534; border-color: #e2e8f0; padding: 8px 4px; font-size: 11px; }
+.rbc-admin-light-wrapper .rbc-day-bg { background: transparent; }
+.rbc-admin-light-wrapper .rbc-day-bg + .rbc-day-bg { border-color: #f1f5f9; }
+.rbc-admin-light-wrapper .rbc-month-row + .rbc-month-row { border-color: #f1f5f9; }
+.rbc-admin-light-wrapper .rbc-date-cell { color: #64748b; font-size: 11px; padding: 4px; }
+.rbc-admin-light-wrapper .rbc-date-cell.rbc-now { color: #16a34a; font-weight: bold; }
+.rbc-admin-light-wrapper .rbc-today { background: rgba(22, 163, 74, 0.08); }
+.rbc-admin-light-wrapper .rbc-off-range-bg { background: #f8fafc; }
+.rbc-admin-light-wrapper .rbc-event { border-radius: 4px; }
+.rbc-admin-light-wrapper .rbc-event.rbc-selected { box-shadow: 0 0 0 2px #16a34a; }
+.rbc-admin-light-wrapper .rbc-show-more { color: #16a34a; font-size: 10px; }

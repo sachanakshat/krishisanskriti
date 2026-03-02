@@ -20,11 +20,11 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: t.nav.home },
-    { href: "#about", label: t.nav.about },
-    { href: "#training", label: t.nav.training },
-    { href: "#calendar", label: t.nav.calendar },
-    { href: "#videos", label: t.nav.videos },
-    { href: "#contact", label: t.nav.contact },
+    { href: "/#about", label: t.nav.about },
+    { href: "/#training", label: t.nav.training },
+    { href: "/#calendar", label: t.nav.calendar },
+    { href: "/#videos", label: t.nav.videos },
+    { href: "/#contact", label: t.nav.contact },
   ];
 
   const isDark = theme === "dark";

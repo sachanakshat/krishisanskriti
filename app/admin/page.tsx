@@ -740,7 +740,7 @@ export default function AdminPage() {
           {tab === "dashboard" && <DashboardTab regs={regs} videos={videos} />}
           {tab === "registrations" && <RegistrationsTab />}
           {tab === "videos" && <VideosTab />}
-          {tab === "batches" && <AdminBatchCalendar />}
+          {tab === "batches" && <AdminBatchCalendar dark={dark} />}
         </div>
       </div>
     </AdminThemeCtx.Provider>
