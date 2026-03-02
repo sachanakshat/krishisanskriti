@@ -59,7 +59,7 @@ export default function HeroSection() {
         </p>
 
         {/* Description */}
-        <p className="text-green-800/70 dark:text-zinc-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
+        <p className="text-slate-600 dark:text-zinc-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
           {t.hero.description}
         </p>
 
@@ -73,7 +73,7 @@ export default function HeroSection() {
           </Link>
           <a
             href="#about"
-            className="w-full sm:w-auto px-8 py-4 border border-green-400/50 dark:border-zinc-700 hover:border-green-500 dark:hover:border-green-700/70 text-green-700 dark:text-zinc-300 hover:text-green-600 dark:hover:text-green-400 font-semibold rounded-full text-base sm:text-lg transition-all duration-300 hover:bg-green-50 dark:hover:bg-green-950/20"
+            className="w-full sm:w-auto px-8 py-4 border border-green-400/50 dark:border-zinc-700 hover:border-green-500 dark:hover:border-green-700/70 text-slate-600 dark:text-zinc-300 hover:text-green-600 dark:hover:text-green-400 font-semibold rounded-full text-base sm:text-lg transition-all duration-300 hover:bg-green-50 dark:hover:bg-green-950/20"
           >
             {t.hero.ctaSecondary}
           </a>

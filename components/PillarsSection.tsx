@@ -19,7 +19,7 @@ export default function PillarsSection() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-green-900 dark:text-white mb-5 leading-tight">
             {t.about.title}
           </h2>
-          <p className="text-green-700/70 dark:text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 dark:text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             {t.about.description}
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function PillarsSection() {
                 <h3 className="text-lg sm:text-xl font-bold text-green-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300">
                   {pillar.title}
                 </h3>
-                <p className="text-green-700/70 dark:text-zinc-400 text-sm leading-relaxed">{pillar.description}</p>
+                <p className="text-slate-600 dark:text-zinc-400 text-sm leading-relaxed">{pillar.description}</p>
               </div>
             </div>
           ))}

@@ -61,7 +61,7 @@ function VideoCard({ video, lang }: { video: VideoPost; lang: "en" | "hi" }) {
         <h3 className="text-green-900 dark:text-white font-bold text-base leading-snug mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
           {title}
         </h3>
-        <p className="text-green-700/60 dark:text-zinc-500 text-xs leading-relaxed mb-4 line-clamp-2">
+        <p className="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed mb-4 line-clamp-2">
           {description}
         </p>
 

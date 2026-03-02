@@ -18,13 +18,13 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mb-4">
               <span className="text-2xl">🌿</span>
               <div className="flex flex-col leading-none">
-                <span className="text-green-400 font-bold text-base">
+                <span className="text-green-700 dark:text-green-400 font-bold text-base">
                   Krishi Sanskriti
                 </span>
                 <span className="text-green-700 text-xs">कृषि संस्कृति</span>
               </div>
             </div>
-            <p className="text-green-700/60 dark:text-zinc-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed max-w-xs">
               {t.footer.tagline}
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 text-sm transition-colors duration-200"
+                  className="text-slate-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 text-sm transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -60,19 +60,19 @@ export default function Footer() {
             </h4>
             <div className="flex flex-col gap-3 text-sm">
               <a href="https://www.youtube.com/@Krishisanskritiofficial" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                className="flex items-center gap-2 text-slate-500 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
                 <span>📺</span><span>YouTube: Krishi Sanskriti</span>
               </a>
               <a href="https://wa.me/918707673442" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                className="flex items-center gap-2 text-slate-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                 <span>💬</span><span>WhatsApp: +91 8707673442</span>
               </a>
               <a href="tel:+918707673442"
-                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                className="flex items-center gap-2 text-slate-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                 <span>📞</span><span>+91 8707673442</span>
               </a>
               <a href="mailto:sachanjhansi@gmail.com"
-                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                className="flex items-center gap-2 text-slate-500 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
                 <span>📧</span><span>sachanjhansi@gmail.com</span>
               </a>
             </div>
@@ -81,7 +81,7 @@ export default function Footer() {
 
         {/* Map */}
         <div className="mb-10">
-          <h4 className="text-white font-bold mb-4 text-sm tracking-wide uppercase">
+          <h4 className="text-slate-800 dark:text-white font-bold mb-4 text-sm tracking-wide uppercase">
             📍 {t.footer.contact === "Contact" ? "Our Location" : "हमारा स्थान"}
           </h4>
           <div className="rounded-2xl overflow-hidden border border-zinc-800/60 w-full aspect-video sm:aspect-[16/6]">
@@ -100,8 +100,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-green-200/40 dark:border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-green-600/50 dark:text-zinc-600 text-xs">{t.footer.copyright}</p>
-          <div className="flex items-center gap-4 text-green-500/40 dark:text-zinc-700 text-xs">
+          <p className="text-slate-400 dark:text-zinc-600 text-xs">{t.footer.copyright}</p>
+          <div className="flex items-center gap-4 text-slate-400 dark:text-zinc-700 text-xs">
             <span>Made with 💚 for India&apos;s Farmers</span>
           </div>
         </div>

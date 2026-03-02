@@ -25,7 +25,7 @@ export default function TrainingSection() {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-green-900 dark:text-white mb-5 leading-tight whitespace-pre-line">
               {t.training.title}
             </h2>
-            <p className="text-green-700/70 dark:text-zinc-400 text-sm sm:text-base leading-relaxed mb-9">
+            <p className="text-slate-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed mb-9">
               {t.training.description}
             </p>
 
@@ -35,7 +35,7 @@ export default function TrainingSection() {
                   <span className="mt-0.5 w-5 h-5 rounded-full bg-green-100 dark:bg-green-950/70 border border-green-400/50 dark:border-green-700/50 flex items-center justify-center shrink-0 group-hover:bg-green-200 dark:group-hover:bg-green-900/70 transition-colors">
                     <Check size={11} className="text-green-600 dark:text-green-400" />
                   </span>
-                  <span className="text-green-800/80 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">{feature}</span>
+                  <span className="text-slate-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">{feature}</span>
                 </div>
               ))}
             </div>
@@ -45,16 +45,16 @@ export default function TrainingSection() {
           <div className="md:sticky md:top-24">
             <div className="rounded-3xl bg-linear-to-br from-green-100/80 via-white/90 to-white/80 dark:from-green-950/60 dark:via-zinc-900/80 dark:to-zinc-900/60 border border-green-300/50 dark:border-green-800/30 p-8 shadow-xl shadow-green-200/40 dark:shadow-none dark:glow-green">
               <div className="text-center mb-8">
-                <p className="text-green-600/60 dark:text-zinc-500 text-xs mb-2 uppercase tracking-widest">{t.training.feePeriod}</p>
+                <p className="text-slate-500 dark:text-zinc-500 text-xs mb-2 uppercase tracking-widest">{t.training.feePeriod}</p>
                 <div className="text-3xl sm:text-4xl font-black text-green-900 dark:text-white mb-1">{t.training.fee}</div>
-                <p className="text-green-600/60 dark:text-zinc-500 text-xs mt-2">{t.training.feeNote}</p>
+                <p className="text-slate-500 dark:text-zinc-500 text-xs mt-2">{t.training.feeNote}</p>
               </div>
               <div className="border-t border-green-200/60 dark:border-green-900/30 mb-6" />
               <div className="flex items-start gap-3 mb-6 p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/20">
                 <span className="text-lg">🔒</span>
                 <div>
                   <p className="text-amber-700 dark:text-amber-400 text-xs font-semibold mb-1">{t.payment.title}</p>
-                  <p className="text-amber-600/70 dark:text-zinc-500 text-xs leading-relaxed">{t.payment.description}</p>
+                  <p className="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">{t.payment.description}</p>
                 </div>
               </div>
               <Link href="/register"

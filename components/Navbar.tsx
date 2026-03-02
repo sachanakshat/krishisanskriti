@@ -61,7 +61,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-green-700 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200 text-sm font-medium"
+                className="text-slate-700 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200 text-sm font-medium"
               >
                 {link.label}
               </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
             {/* Hamburger — mobile */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-1.5 text-green-700 dark:text-zinc-400 hover:text-green-600 dark:hover:text-white transition-colors"
+              className="md:hidden p-1.5 text-slate-700 dark:text-zinc-400 hover:text-green-600 dark:hover:text-white transition-colors"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -119,7 +119,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-green-800 dark:text-zinc-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-950/30 px-4 py-3 rounded-xl transition-all text-base"
+                  className="text-slate-700 dark:text-zinc-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-green-50 dark:hover:bg-green-950/30 px-4 py-3 rounded-xl transition-all text-base"
                 >
                   {link.label}
                 </Link>

@@ -24,7 +24,7 @@ export default function StatsSection() {
               <div className="text-3xl sm:text-4xl font-black text-gradient-green mb-1">
                 {stat.value}
               </div>
-              <div className="text-green-700/70 dark:text-zinc-500 text-xs sm:text-sm font-medium">
+              <div className="text-slate-500 dark:text-zinc-500 text-xs sm:text-sm font-medium">
                 {stat.label}
               </div>
             </div>
