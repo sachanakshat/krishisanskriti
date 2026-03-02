@@ -39,19 +39,29 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// PATCH /api/admin/registrations  — update paymentStatus
+// PATCH /api/admin/registrations  — update paymentStatus and/or batch assignment
 export async function PATCH(req: NextRequest) {
   try {
-    const { id, paymentStatus } = await req.json();
-    if (!id || !paymentStatus) {
-      return NextResponse.json({ error: "id and paymentStatus required" }, { status: 400 });
+    const body = await req.json();
+    const { id, paymentStatus, batchId, batchWeekStart } = body;
+    if (!id) {
+      return NextResponse.json({ error: "id required" }, { status: 400 });
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const updates: Record<string, any> = {};
+    if (paymentStatus !== undefined) updates.paymentStatus = paymentStatus;
+    if (batchId !== undefined) updates.batchId = batchId ?? null;
+    if (batchWeekStart !== undefined) updates.batchWeekStart = batchWeekStart ?? null;
+    if (Object.keys(updates).length === 0) {
+      return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
     }
     const { ObjectId } = await import("mongodb");
     const client = await clientPromise;
     const db = client.db("krishisanskriti");
-    await db
-      .collection("registrations")
-      .updateOne({ _id: new ObjectId(id) }, { $set: { paymentStatus } });
+    await db.collection("registrations").updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updates }
+    );
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
