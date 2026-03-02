@@ -13,21 +13,18 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="bg-black/60 border-y border-green-900/20 py-14">
+    <section className="bg-green-50/80 dark:bg-black/60 border-y border-green-200/60 dark:border-green-900/20 py-14">
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="text-center group"
-            >
+            <div key={i} className="text-center group">
               <div className="text-2xl mb-2 group-hover:scale-125 transition-transform duration-300">
                 {stat.icon}
               </div>
               <div className="text-3xl sm:text-4xl font-black text-gradient-green mb-1">
                 {stat.value}
               </div>
-              <div className="text-zinc-500 text-xs sm:text-sm font-medium">
+              <div className="text-green-700/70 dark:text-zinc-500 text-xs sm:text-sm font-medium">
                 {stat.label}
               </div>
             </div>

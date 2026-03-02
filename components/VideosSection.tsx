@@ -24,7 +24,7 @@ function VideoCard({ video, lang }: { video: VideoPost; lang: "en" | "hi" }) {
 
   return (
     <div
-      className="group rounded-2xl overflow-hidden border border-zinc-800/60 bg-zinc-900/50 hover:border-green-800/60 transition-all duration-300 card-hover"
+      className="group rounded-2xl overflow-hidden border border-green-200/60 dark:border-zinc-800/60 bg-white/70 dark:bg-zinc-900/50 hover:border-green-400/60 dark:hover:border-green-800/60 transition-all duration-300 card-hover shadow-sm dark:shadow-none"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -58,10 +58,10 @@ function VideoCard({ video, lang }: { video: VideoPost; lang: "en" | "hi" }) {
 
       {/* Card body */}
       <div className="p-5">
-        <h3 className="text-white font-bold text-base leading-snug mb-2 group-hover:text-green-400 transition-colors line-clamp-2">
+        <h3 className="text-green-900 dark:text-white font-bold text-base leading-snug mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
           {title}
         </h3>
-        <p className="text-zinc-500 text-xs leading-relaxed mb-4 line-clamp-2">
+        <p className="text-green-700/60 dark:text-zinc-500 text-xs leading-relaxed mb-4 line-clamp-2">
           {description}
         </p>
 
@@ -140,7 +140,7 @@ export default function VideosSection() {
   }
 
   return (
-    <section id="videos" className="py-24 bg-[#050a05] relative overflow-hidden">
+    <section id="videos" className="py-24 bg-green-50/60 dark:bg-[#050a05] relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-900/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -152,7 +152,7 @@ export default function VideosSection() {
               <Youtube size={13} />
               {lang === "hi" ? "हमारे वीडियो" : "Our Videos"}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-green-900 dark:text-white leading-tight">
               {lang === "hi" ? "ताज़े वीडियो और ब्लॉग" : "Latest Videos & Blog Posts"}
             </h2>
           </div>

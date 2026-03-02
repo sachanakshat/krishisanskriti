@@ -4,14 +4,55 @@
   --font-sans: var(--font-noto-sans), "Noto Sans", sans-serif;
 }
 
+@variant dark (&:where(.dark, .dark *));
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
+/* Light theme (default) */
 body {
+  background-color: #f7fdf7;
+  color: #14532d;
+  font-family: var(--font-noto-sans), "Noto Sans", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme */
+html.dark body {
   background-color: #050a05;
   color: #f0fdf4;
-  font-family: var(--font-noto-sans), "Noto Sans", sans-serif;
+}
+
+/* Theme CSS variables */
+:root {
+  --bg-primary: #f7fdf7;
+  --bg-secondary: #ecfdf5;
+  --bg-card: rgba(220, 252, 231, 0.5);
+  --bg-card-hover: rgba(187, 247, 208, 0.4);
+  --border-card: rgba(134, 239, 172, 0.4);
+  --border-card-hover: rgba(74, 222, 128, 0.5);
+  --text-primary: #14532d;
+  --text-secondary: #166534;
+  --text-muted: #4b7a5e;
+  --text-faint: #86a899;
+  --nav-bg: rgba(240, 255, 244, 0.92);
+  --nav-border: rgba(134, 239, 172, 0.3);
+}
+
+html.dark {
+  --bg-primary: #050a05;
+  --bg-secondary: #09120a;
+  --bg-card: rgba(39, 39, 42, 0.6);
+  --bg-card-hover: rgba(39, 39, 42, 0.8);
+  --border-card: rgba(63, 63, 70, 0.6);
+  --border-card-hover: rgba(22, 101, 52, 0.6);
+  --text-primary: #f0fdf4;
+  --text-secondary: #bbf7d0;
+  --text-muted: #a1a1aa;
+  --text-faint: #52525b;
+  --nav-bg: rgba(0, 0, 0, 0.9);
+  --nav-border: rgba(22, 101, 52, 0.3);
 }
 
 .text-gradient-green {

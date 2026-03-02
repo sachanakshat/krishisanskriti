@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="bg-black/80 border-t border-green-900/20 py-14"
+      className="bg-green-950/20 dark:bg-black/80 border-t border-green-200/40 dark:border-green-900/20 py-14"
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
@@ -24,14 +24,14 @@ export default function Footer() {
                 <span className="text-green-700 text-xs">कृषि संस्कृति</span>
               </div>
             </div>
-            <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-green-700/60 dark:text-zinc-500 text-sm leading-relaxed max-w-xs">
               {t.footer.tagline}
             </p>
           </div>
 
           {/* Quick links */}
           <div>
-            <h4 className="text-white font-bold mb-4 text-sm tracking-wide uppercase">
+            <h4 className="text-green-900 dark:text-white font-bold mb-4 text-sm tracking-wide uppercase">
               {t.footer.links}
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-zinc-500 hover:text-green-400 text-sm transition-colors duration-200"
+                  className="text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 text-sm transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -55,41 +55,25 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-bold mb-4 text-sm tracking-wide uppercase">
+            <h4 className="text-green-900 dark:text-white font-bold mb-4 text-sm tracking-wide uppercase">
               {t.footer.contact}
             </h4>
             <div className="flex flex-col gap-3 text-sm">
-              <a
-                href="https://www.youtube.com/@Krishisanskritiofficial"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-500 hover:text-red-400 transition-colors"
-              >
-                <span>📺</span>
-                <span>YouTube: Krishi Sanskriti</span>
+              <a href="https://www.youtube.com/@Krishisanskritiofficial" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                <span>📺</span><span>YouTube: Krishi Sanskriti</span>
               </a>
-              <a
-                href="https://wa.me/918707673442"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
-              >
-                <span>💬</span>
-                <span>WhatsApp: +91 8707673442</span>
+              <a href="https://wa.me/918707673442" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <span>💬</span><span>WhatsApp: +91 8707673442</span>
               </a>
-              <a
-                href="tel:+918707673442"
-                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
-              >
-                <span>📞</span>
-                <span>+91 8707673442</span>
+              <a href="tel:+918707673442"
+                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <span>📞</span><span>+91 8707673442</span>
               </a>
-              <a
-                href="mailto:sachanjhansi@gmail.com"
-                className="flex items-center gap-2 text-zinc-500 hover:text-green-400 transition-colors"
-              >
-                <span>📧</span>
-                <span>sachanjhansi@gmail.com</span>
+              <a href="mailto:sachanjhansi@gmail.com"
+                className="flex items-center gap-2 text-green-700/60 dark:text-zinc-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <span>📧</span><span>sachanjhansi@gmail.com</span>
               </a>
             </div>
           </div>
@@ -115,9 +99,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-zinc-600 text-xs">{t.footer.copyright}</p>
-          <div className="flex items-center gap-4 text-zinc-700 text-xs">
+        <div className="border-t border-green-200/40 dark:border-zinc-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-green-600/50 dark:text-zinc-600 text-xs">{t.footer.copyright}</p>
+          <div className="flex items-center gap-4 text-green-500/40 dark:text-zinc-700 text-xs">
             <span>Made with 💚 for India&apos;s Farmers</span>
           </div>
         </div>
