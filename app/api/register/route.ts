@@ -24,11 +24,25 @@ export async function POST(req: NextRequest) {
         if (batch) {
           const count = await db.collection("registrations").countDocuments({ batchId: String(batchId) });
           if (count >= (batch.maxSeats ?? 32)) {
-            return NextResponse.json({ error: "Batch is full" }, { status: 409 });
+            return NextResponse.json({ error: "Batch is full", code: "BATCH_FULL" }, { status: 409 });
           }
         }
       } catch {
         // Invalid ObjectId — ignore seat check
+      }
+    }
+
+    // Duplicate phone-per-batch check
+    if (batchId) {
+      const existing = await db.collection("registrations").findOne({
+        phone: String(phone).trim(),
+        batchId: String(batchId),
+      });
+      if (existing) {
+        return NextResponse.json(
+          { error: "A registration with this phone number already exists for this batch.", code: "DUPLICATE" },
+          { status: 409 }
+        );
       }
     }
 

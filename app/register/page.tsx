@@ -71,7 +71,7 @@ function RegisterForm() {
   const [selectedBatch, setSelectedBatch] = useState<BatchWithCount | null>(null);
   const [loadingBatches, setLoadingBatches] = useState(true);
   const [formData, setFormData] = useState({ name: "", village: "", district: "", state: "", phone: "", land: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "full">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "full" | "duplicate">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
@@ -100,7 +100,11 @@ function RegisterForm() {
         body: JSON.stringify({ ...formData, batchId: selectedBatchId, batchWeekStart: selectedBatch?.weekStart ?? weekStartParam }),
       });
       const data = await res.json();
-      if (!res.ok) { if (res.status === 409) { setStatus("full"); return; } throw new Error(data.error ?? "Failed"); }
+      if (!res.ok) {
+        if (res.status === 409 && data.code === "DUPLICATE") { setStatus("duplicate"); return; }
+        if (res.status === 409) { setStatus("full"); return; }
+        throw new Error(data.error ?? "Failed");
+      }
       setStatus("success");
       setFormData({ name: "", village: "", district: "", state: "", phone: "", land: "" });
     } catch (err: unknown) { setStatus("error"); setErrorMsg(err instanceof Error ? err.message : t.register.error); }
@@ -193,6 +197,36 @@ function RegisterForm() {
                 <Link href="/#calendar" className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-full text-sm transition-all">
                   <Calendar size={14} />{lang === "hi" ? "दूसरा बैच चुनें" : "Choose Another Batch"}
                 </Link>
+              </div>
+            ) : status === "duplicate" ? (
+              <div className="text-center py-10">
+                <div className="w-16 h-16 bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-800/40 rounded-full flex items-center justify-center mx-auto mb-5">
+                  <AlertCircle size={28} className="text-orange-500" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                  {lang === "hi" ? "प्रविष्टि पहले से मौजूद है!" : "Entry Already Exists!"}
+                </h3>
+                <p className="text-slate-500 dark:text-zinc-400 text-sm mb-1">
+                  {lang === "hi"
+                    ? "इस फ़ोन नंबर से इस बैच में पहले से पंजीकरण हो चुका है।"
+                    : "This phone number is already registered for this batch."}
+                </p>
+                <p className="text-slate-400 dark:text-zinc-500 text-xs mb-6">
+                  {lang === "hi"
+                    ? "अगर आप किसी और बैच में जाना चाहते हैं तो नीचे विकल्प चुनें।"
+                    : "If you’d like to join a different batch, choose one below."}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={() => setStatus("idle")}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-full text-sm transition-all"
+                  >
+                    {lang === "hi" ? "वापस जाएं" : "Go Back"}
+                  </button>
+                  <Link href="/#calendar" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-full text-sm transition-all">
+                    <Calendar size={14} />{lang === "hi" ? "दूसरा बैच चुनें" : "Choose Another Batch"}
+                  </Link>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
