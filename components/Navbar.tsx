@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -43,9 +44,14 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
-              🌿
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Krishi Sanskriti Logo"
+              width={40}
+              height={40}
+              className="rounded-full group-hover:scale-110 transition-transform duration-300"
+              priority
+            />
             <div className="flex flex-col leading-none">
               <span className="text-green-600 dark:text-green-400 font-bold text-base leading-tight tracking-wide">
                 Krishi Sanskriti

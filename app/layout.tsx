@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   title: "Krishi Sanskriti | कृषि संस्कृति - Organic Farming & Healthy Living",
   description:
     "Learn organic farming, healthy lifestyle and Sanatan Sanskriti. Join our training program. जैविक खेती, स्वस्थ जीवन और सनातन संस्कृति सीखें।",
+  icons: {
+    icon: "/icon.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

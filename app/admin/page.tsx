@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, createContext, useContext } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
   Lock, Users, Youtube, LayoutDashboard, Search, ChevronDown, ChevronUp,
@@ -692,7 +693,7 @@ export default function AdminPage() {
         <div className={`sticky top-0 z-30 border-b backdrop-blur-sm ${topbar(dark)}`}>
           <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-lg">🌿</span>
+              <Image src="/logo.png" alt="Krishi Sanskriti" width={32} height={32} className="rounded-full" />
               <div>
                 <p className={`${txt(dark)} font-black text-sm leading-none`}>Krishi Sanskriti</p>
                 <p className={`${txtFaint(dark)} text-xs`}>Admin Panel</p>
